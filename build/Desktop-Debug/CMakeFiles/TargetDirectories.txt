@@ -1,0 +1,9 @@
+/home/zino/Desktop/test/build/Desktop-Debug/CMakeFiles/test.dir
+/home/zino/Desktop/test/build/Desktop-Debug/CMakeFiles/edit_cache.dir
+/home/zino/Desktop/test/build/Desktop-Debug/CMakeFiles/rebuild_cache.dir
+/home/zino/Desktop/test/build/Desktop-Debug/CMakeFiles/list_install_components.dir
+/home/zino/Desktop/test/build/Desktop-Debug/CMakeFiles/install.dir
+/home/zino/Desktop/test/build/Desktop-Debug/CMakeFiles/install/local.dir
+/home/zino/Desktop/test/build/Desktop-Debug/CMakeFiles/install/strip.dir
+/home/zino/Desktop/test/build/Desktop-Debug/CMakeFiles/test_autogen_timestamp_deps.dir
+/home/zino/Desktop/test/build/Desktop-Debug/CMakeFiles/test_autogen.dir
