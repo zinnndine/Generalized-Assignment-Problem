@@ -17,6 +17,19 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
 find_package(pybind11 REQUIRED)
 
+#------ copying files---
+set(PYTHON_SRC_DIR "${CMAKE_SOURCE_DIR}/python")
+set(PYTHON_DEST_DIR "${CMAKE_BINARY_DIR}/python")
+
+# Create a target to copy files
+add_custom_target(copy_python ALL
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${PYTHON_DEST_DIR}"
+    COMMAND ${CMAKE_COMMAND} -E copy_directory "${PYTHON_SRC_DIR}" "${PYTHON_DEST_DIR}"
+    COMMENT "Copying Python scripts to build folder"
+)
+install(DIRECTORY "${CMAKE_SOURCE_DIR}/python"
+        DESTINATION "python")
+
 set(PROJECT_SOURCES
     main.cpp
     mainwindow.cpp

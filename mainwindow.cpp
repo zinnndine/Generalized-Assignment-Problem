@@ -13,6 +13,7 @@
 #include <QCoreApplication>
 #include <string>
 #include <sstream>
+#include <filesystem>
 
 
 namespace py = pybind11;
@@ -45,58 +46,54 @@ void MainWindow::on_run_clicked()
     ui->stackedWidget->setCurrentIndex(0);
 
     if (MainWindow::p.size() !=0 && MainWindow::c.size() !=0){
-        QString exePath = QCoreApplication::applicationDirPath();
+        //std::string cpp_path = __FILE__;
+        QString exeDir = QCoreApplication::applicationDirPath();
+        std::filesystem::path file_path = exeDir.toStdString();
 
-        QDir projectDir(exePath);
-        std::cout << projectDir.absolutePath().toStdString() << std::endl;
-        projectDir.cdUp();
-        std::cout << projectDir.absolutePath().toStdString() << std::endl;
-        projectDir.cdUp();
-        std::cout << projectDir.absolutePath().toStdString() << std::endl;
+        file_path /= "python";
 
 
-        QString pythonPath = projectDir.filePath("python/");
+        py::scoped_interpreter guard{};
 
-     py::scoped_interpreter guard{};
+        py::module sys = py::module::import("sys");
+        sys.attr("path").attr("append")(file_path.string());
+        std::cout << "Python path: " << file_path.string() << std::endl;
 
-     py::module sys = py::module::import("sys");
-     sys.attr("path").attr("append")(pythonPath.toStdString());
-     std::cout << "Python path: " << pythonPath.toStdString() << std::endl;
+        py::module H1 = py::module::import("H1");
 
-    py::module H1 = py::module::import("H1");
+        if(ui->hur->currentText() == "Huristic 1"){
+            H1 = py::module::import("H1");
+        }
+        else if(ui->hur->currentText() == "Huristic 2"){
+            H1 = py::module::import("H2");
+        }
+        else if(ui->hur->currentText() == "Huristic 3"){
+            H1 = py::module::import("H3");
 
-    if(ui->hur->currentText() == "Huristic 1"){
-     H1 = py::module::import("H1");
-     }
-    else if(ui->hur->currentText() == "Huristic 2"){
-         H1 = py::module::import("H2");
-    }
-     else if(ui->hur->currentText() == "Huristic 3"){
-          H1 = py::module::import("H3");
+        }
+        else if(ui->hur->currentText() == "Huristic 4"){
+            H1 = py::module::import("H4");
+        }
 
-     }
-    else if(ui->hur->currentText() == "Huristic 4"){
-         H1 = py::module::import("H4");
-    }
-    // Call functions
-
-    affictation=H1.attr("main")(MainWindow::tm,MainWindow::p,MainWindow::c,MainWindow::m,MainWindow::n).cast<std::vector<std::vector<int>>>();
-    if (affictation == std::vector<std::vector<int>>{{0, 0},{0, 0}}){
-        ui->text->setText("No Result");
-    }
-    else{
-    QString st = ui->hur->currentText();
-    ui->text->setText("Result from algorithme "+st+ " :");
-    for (auto x : affictation) {
-        std::cout << x[0] << " , " <<x[1] << " " <<std::endl;
-        ui->text->append("("+QString::number(x[0]) + "," + QString::number(x[1]) + ")");
-    }
-    }
+        affictation=H1.attr("main")(MainWindow::tm,MainWindow::p,MainWindow::c,MainWindow::m,MainWindow::n).cast<std::vector<std::vector<int>>>();
+        if (affictation == std::vector<std::vector<int>>{{0, 0},{0, 0}}){
+            ui->text->setText("No Result");
+        }
+        else{
+            QString st = ui->hur->currentText();
+            ui->text->setText("Result from algorithme "+st+ " :");
+            for (auto x : affictation) {
+                std::cout << x[0] << " , " <<x[1] << " " <<std::endl;
+                ui->text->append("("+QString::number(x[0]) + "," + QString::number(x[1]) + ")");
+            }
+        }
     }
     else{
         QMessageBox::warning(this,"Warning","there is no data yet imported \n please press the \'Fill Data botton\'  \n and import data");
     }
 }
+
+
 
 
 void MainWindow::on_fill_clicked()
@@ -125,11 +122,9 @@ void MainWindow::on_pushButton_clicked()
 
         std::string token;
 
-        // Read first value
         std::getline(ss, token, ',');
         int first = std::stoi(token);
 
-        // Read second value
         std::getline(ss, token, ',');
         int second = std::stoi(token);
 

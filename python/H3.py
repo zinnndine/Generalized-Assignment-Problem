@@ -1,33 +1,15 @@
 
-
-tm=[]
-
-T=[]
-p=[]
-
-c=[]
-m=0
-n=0
-tm = [5, 7, 7]
+tm = []
                 
-p = [
-                    [2, 3, 2, 3, 2],
-                    [4, 3, 3, 2, 2], 
-                    [5, 3, 4, 3, 2]
-        ]
+p = []
                 
-c = [
-                    [6, 4, 2, 5, 4],
-                    [5, 2, 3, 4, 5],
-                    [4, 5, 3, 7, 3]
-        ]
+c = []
 
-n = 3
-m= 5
-temps_left = tm[:]
+n = 0
+m= 0
+temps_left = []
 copy_c = []
-T = [j+1 for j in range(0,m)]
-
+T=[]
 Ct=0
 affictaion = []
 huge=100000
@@ -245,7 +227,19 @@ def algo_affic(mm,nn):
 
 
 
-def main():
+def main(tile,pp,cc,client,machines):
+    global p,c,m,n,tm,temps_left,T
+    p.clear()
+    p=pp
+    c.clear()
+    c=cc
+    m=client
+    n=machines
+    tm.clear()
+    tm= tile
+    temps_left.clear()
+    temps_left = tile
+    T = [j+1 for j in range(0,m)]
     if m == n :
         hz =  algo_affic(m,n)
     else:
@@ -254,4 +248,5 @@ def main():
     print(affictaion)
     return affictaion        
     
+
 
