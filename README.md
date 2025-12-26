@@ -1,8 +1,54 @@
-# Generalized-Assignment-Problem
-A python/C++ project that uses  variants of heuristic methods  to solve the Generalized Assignment Problem (GAP) 
 
-## Description
+---
 
-This project is a python implementation of heuristic methods for solving the Generalized Assignment Problem (GAP) — an NP-hard combinatorial optimization problem where a set of tasks must be assigned to agents under capacity constraints, while minimizing the total cost, while using a GUI created with c++ with the help of qt creator.
+# Generalized Assignment Problem
 
-**Status:** Work in Progress – Not yet complete
+# Generalized Assignment Problem – Heuristic Solver with GUI
+
+A heuristic-based solver for the **Generalized Assignment Problem (GAP)** with a Qt C++ graphical interface and Python-based heuristic engine.
+
+---
+
+## Problem Statement
+
+The Generalized Assignment Problem consists of assigning tasks to agents while respecting capacity constraints and minimizing total cost.  
+It is an NP-hard combinatorial optimization problem with applications in scheduling, logistics, and resource allocation.
+
+---
+
+## Architecture
+
+- The GUI is implemented in **C++ using Qt Creator**
+- Optimization heuristics are implemented in **Python** for rapid prototyping
+- Clear separation between interface and algorithmic logic
+
+---
+
+## Heuristics Implemented
+- Greedy assignment heuristics
+- Capacity-aware heuristics
+- Zero-based heuristic
+- priority-based heuristic
+
+---
+
+## Implementation Details
+
+- GUI: **Qt (C++)**
+- Algorithms: **Python**
+
+---
+
+## How to Run
+
+1. Launch the Qt application
+2. Input instance data
+3. Run selected heuristic
+4. View assignment and total cost
+
+---
+
+
+
+
+
